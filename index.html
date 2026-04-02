@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>武汉文理学院信息与计算机学院 2026 招生简章</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+            background: #0a1628;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        #app {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 30px;
+            text-align: center;
+            background: linear-gradient(160deg, #e8f4f8 0%, #f0f6fa 40%, #e5eef5 100%);
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(44, 124, 182, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .slide::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 149, 0, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .nav-buttons {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .nav-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #2c7cb6, #3498db);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(44, 124, 182, 0.3);
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 124, 182, 0.4);
+        }
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .slide h1 {
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            color: #0a2b3e;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(44, 124, 182, 0.1);
+        }
+        .slide h2 {
+            font-size: 2.2rem;
+            margin: 25px 0 20px;
+            color: #1e466e;
+            border-left: 6px solid;
+            border-image: linear-gradient(180deg, #2c7cb6, #3498db) 1;
+            padding-left: 25px;
+            text-align: left;
+            width: 90%;
+            max-width: 1000px;
+            font-weight: 700;
+        }
+        .slide h3 {
+            font-size: 1.6rem;
+            margin: 25px 0 15px;
+            color: #1f6392;
+            font-weight: 600;
+        }
+        .slide p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #34495e;
+            max-width: 900px;
+            margin: 15px auto;
+        }
+        .slide ul {
+            text-align: left;
+            max-width: 850px;
+            margin: 15px auto;
+            padding-left: 2rem;
+        }
+        .slide li {
+            margin: 14px 0;
+            color: #34495e;
+            line-height: 1.7;
+            font-size: 1.08rem;
+            transition: all 0.3s ease;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            border-left: 4px solid #3498db;
+        }
+        .slide li:hover {
+            color: #1e6f9f;
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(6px);
+            box-shadow: 0 4px 20px rgba(44, 124, 182, 0.12);
+        }
+        .corner-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 90px;
+            height: auto;
+            opacity: 0.85;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        .corner-logo-right {
+            position: absolute;
+            top: 20px;
+            right: 120px;
+            width: 300px;
+            height: auto;
+            opacity: 0.85;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        .dept-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1f6392;
+            margin: 12px 0 10px 0;
+            padding-left: 10px;
+            border-left: 4px solid #2c7cb6;
+        }
+        .majors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 240px;
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            padding: 10px;
+            align-items: stretch;
+        }
+        .major-item.dept-card {
+            background: linear-gradient(145deg, #fff8f0, #fffbf5);
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+        }
+        .major-item.dept-card::before {
+            background: linear-gradient(180deg, #ff9500, #ffb347);
+        }
+        .major-item.dept-card:hover {
+            transform: none;
+            box-shadow: 0 8px 30px rgba(255, 149, 0, 0.1);
+        }
+        .dept-list {
+            font-size: 0.85rem;
+            color: #34495e;
+            line-height: 1.6;
+            flex: 1;
+        }
+        .dept-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0 0;
+        }
+        .dept-list li {
+            margin: 4px 0;
+            padding: 6px 10px;
+            background: rgba(255, 149, 0, 0.08);
+            border-left: 3px solid #ffb347;
+        }
+        .dept-list li::before {
+            display: none;
+        }
+        .major-item {
+            position: relative;
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(44, 124, 182, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+        .major-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #2c7cb6, #3498db, #5dade2);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            border-radius: 0 0 0 16px;
+        }
+        .major-item:hover::before {
+            transform: scaleY(1);
+        }
+        .major-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(44, 124, 182, 0.15);
+        }
+        .major-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e466e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+        .major-item:hover .major-title {
+            color: #2c7cb6;
+        }
+        .major-icon {
+            font-size: 1.3rem;
+        }
+        .major-desc {
+            flex: 1;
+            overflow: hidden;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: #5a6c7d;
+            display: flex;
+            flex-direction: column;
+        }
+        .major-desc-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .major-btn {
+            display: inline-block;
+            margin-top: auto;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, #2c7cb6, #3498db);
+            color: white;
+            border-radius: 18px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease, background 0.3s ease;
+            align-self: flex-start;
+            flex-shrink: 0;
+        }
+        .major-item:hover .major-btn {
+            opacity: 1;
+        }
+        .major-item:hover .major-btn:hover {
+            background: linear-gradient(135deg, #1e5a7d, #2980b9);
+        }
+        .major-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 18px;
+            background: linear-gradient(135deg, #2c7cb6, #3498db);
+            color: white;
+            border-radius: 22px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.3s ease 0.1s;
+            box-shadow: 0 4px 15px rgba(44, 124, 182, 0.3);
+        }
+        .major-item:hover .major-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .major-item:hover .major-btn:hover {
+            background: linear-gradient(135deg, #1e5a7d, #2980b9);
+            box-shadow: 0 6px 20px rgba(44, 124, 182, 0.4);
+        }
+        .major-detail-slide {
+            background: linear-gradient(135deg, #1a2a3a 0%, #0f212f 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 30px;
+        }
+        .detail-content {
+            text-align: left;
+            max-width: 900px;
+            margin: 20px auto;
+            color: #f0f3f8;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 25px 35px;
+            border-radius: 24px;
+            width: 90%;
+            max-height: 65vh;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .detail-content h3 {
+            color: #ffdd99;
+            margin-top: 22px;
+            margin-bottom: 10px;
+            font-size: 1.45rem;
+            font-weight: 600;
+        }
+        .detail-content p {
+            color: #e8eef5;
+            margin: 14px 0;
+            line-height: 1.7;
+        }
+        .detail-content ul {
+            margin: 10px 0 14px 24px;
+        }
+        .detail-content li {
+            color: #d0dbe8;
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 22px;
+            padding: 12px 32px;
+            font-size: 1rem;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: rgba(255, 179, 71, 0.9);
+            color: #1a2a3a;
+            transform: scale(1.05);
+        }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2c7cb6, #3498db, #5dade2, #ffb347);
+            z-index: 200;
+            transition: width 0.5s;
+            box-shadow: 0 2px 10px rgba(44, 124, 182, 0.4);
+        }
+        .slide-indicators {
+            position: fixed;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            z-index: 100;
+        }
+        .indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(44, 124, 182, 0.25);
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        .indicator:hover {
+            background: rgba(44, 124, 182, 0.5);
+            transform: scale(1.2);
+        }
+        .indicator.active {
+            background: linear-gradient(135deg, #2c7cb6, #3498db);
+            transform: scale(1.3);
+            box-shadow: 0 4px 15px rgba(44, 124, 182, 0.4);
+        }
+        .slide-counter {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 10px 18px;
+            border-radius: 25px;
+            color: #34495e;
+            font-size: 15px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(44, 124, 182, 0.1);
+        }
+        .slide-counter .current {
+            font-weight: 800;
+            font-size: 20px;
+            color: #2c7cb6;
+        }
+        .touch-hint {
+            position: fixed;
+            bottom: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #34495e;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 13px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-80px); }
+        }
+        @media (max-width: 768px) {
+            .slide h1 { font-size: 2rem; }
+            .slide h2 { font-size: 1.6rem; }
+            .slide h3 { font-size: 1.4rem; }
+            .slide li { font-size: 0.95rem; padding: 10px 14px; }
+            .detail-content { padding: 18px; }
+            .nav-btn { padding: 8px 14px; font-size: 13px; }
+            .slide-indicators { display: none; }
+            .majors-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        }
+        .gallery-btn {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #ff9500, #ffb347);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(255, 149, 0, 0.35);
+        }
+        .gallery-btn:hover {
+            background: linear-gradient(135deg, #e08500, #ffa020);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 149, 0, 0.45);
+        }
+        .gallery-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+        .gallery-title {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .gallery-images {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 95%;
+        }
+        .gallery-image-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gallery-image-container:hover {
+            transform: scale(1.04);
+        }
+        .gallery-image-container img {
+            max-width: 100%;
+            max-height: 55vh;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .gallery-image-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffb347;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .gallery-hint {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-top: 35px;
+            text-align: center;
+        }
+        .gallery-back-btn {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 26px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .gallery-back-btn:hover {
+            background: rgba(255, 179, 71, 0.9);
+            color: #1a2a3a;
+        }
+        .gallery-next-hint {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(44, 124, 182, 0.8);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: white;
+            padding: 12px 26px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .gallery-next-hint:hover {
+            background: #2c7cb6;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="progress-bar" :style="{ width: progressWidth + '%' }" v-if="!showGallery && !showGallery2 && !showGallery3 && !showGallery4 && !showGalleryNew"></div>
+    
+    <div class="slide-counter" v-if="!showGallery && !showGallery2 && !showGallery3 && !showGallery4 && !showGalleryNew">
+        <span class="current">{{ currentSlide + 1 }}</span>
+        <span>/ {{ totalSlides }}</span>
+    </div>
+    
+    <div class="slide-indicators" v-if="!showMajorDetail && !showGallery && !showGallery2 && !showGallery3 && !showGallery4 && !showGalleryNew">
+        <div v-for="n in totalSlides" :key="n" 
+             class="indicator"
+             :class="{ active: currentSlide === n - 1 }"
+             @click="goToSlide(n - 1)">
+        </div>
+    </div>
+
+    <!-- 封面 -->
+    <div class="slide" :class="{ active: currentSlide === 0 }">
+        <img src="school.png" class="corner-logo-right" alt="学院">
+        <h1 style="font-size: 3.6rem;">🏫 武汉文理学院<br>信息与计算机学院</h1>
+        <h2 style="border:none; text-align:center; font-size: 2.8rem; margin-top: 30px;">2026 年招生宣传</h2>
+        <p style="font-size: 1.5rem; margin-top: 35px; font-weight: 500; color: #2c7cb6;">文理融通 · AI赋能 · 硬核实践 · 高质就业</p>
+        <p style="font-size: 1.25rem; margin-top: 40px; color: #5a6c7d;">培养数字时代精英，成就智能科技未来</p>
+        <img src="whwl.jpg" class="corner-logo" alt="校徽">
+    </div>
+
+    <!-- 学院简介 -->
+    <div class="slide" :class="{ active: currentSlide === 1 }">
+        <img src="school.png" class="corner-logo-right" alt="学院">
+        <h2>📖 学院简介</h2>
+        <div style="max-width:900px; text-align:left; margin:0 auto;">
+            <p><strong>信息与计算机学院</strong>下设计算机系、人工智能系和公共课部，开设<strong>电子信息工程、计算机科学与技术、数据科学与大数据技术、软件工程、人工智能</strong>5个本科专业及智能产品开发与应用1个专科专业。</p>
+            <p>👩‍🏫 <strong>师资雄厚：</strong>专任教师51名，兼任教师15名；教授3名，副教授/高工33名，高级职称占比达50%；专任教师中博士4名、硕士44名，硕士及以上学位占比100%。</p>
+            <p>🔬 <strong>实验条件优越：</strong>建有物联网技术、嵌入式系统、数据库、网络技术、电路分析等专业实验室23个，总面积4200余平方米，全面支撑高水平工程实践教学。</p>
+            <p>⚙️ <strong>特色育人模式：</strong>推行项目化教学，深化校企合作，实现专业与产业对接、教学内容与职业标准对接。历年全国性学科竞赛成绩斐然，毕业生考研与高质量就业比例位居前列。</p>
+        </div>
+        <img src="whwl.jpg" class="corner-logo" alt="校徽">
+    </div>
+
+    <!-- 专业设置 -->
+    <div class="slide" :class="{ active: currentSlide === 2 }">
+        <img src="school.png" class="corner-logo-right" alt="学院">
+        <h2 style="margin-bottom:15px;">📚 专业设置</h2>
+        <div class="majors-grid">
+            <div class="major-item" @click="openMajorDetail('cs')">
+                <div class="major-title">
+                    <span class="major-icon">🎓</span>
+                    计算机科学与技术
+                </div>
+                <div class="major-desc">
+                    <div class="major-desc-text">四年制本科，工学学士。培养具备扎实的计算机科学理论基础与系统的人工智能专业知识，具有较强的工程实践能力与创新思维的复合型应用人才。主干课程：计算机组成原理、计算机网络、人工智能、数据结构、操作系统、大数据处理等。就业方向：软硬件系统研究设计开发、人工智能算法应用、信息化智能化建设。</div>
+                    <span class="major-btn" @click.stop="openMajorDetail('cs')">📖 查看详情</span>
+                </div>
+            </div>
+            <div class="major-item" @click="openMajorDetail('se')">
+                <div class="major-title">
+                    <span class="major-icon">💻</span>
+                    软件工程
+                </div>
+                <div class="major-desc">
+                    <div class="major-desc-text">四年制本科，工学学士。深度融合"AI+软件"，引入人工智能应用、AI数字媒体技术等前沿课程。培养基于工程化方法的软件开发与项目管理能力，通过校企联合培养与真实项目实训，打造高端复合型人才。就业覆盖互联网大厂、金融科技、移动应用等领域。</div>
+                    <span class="major-btn" @click.stop="openMajorDetail('se')">📖 查看详情</span>
+                </div>
+            </div>
+            <div class="major-item" @click="openMajorDetail('ee')">
+                <div class="major-title">
+                    <span class="major-icon">⚡</span>
+                    电子信息工程
+                </div>
+                <div class="major-desc">
+                    <div class="major-desc-text">四年制本科，工学学士。电子与信息领域的宽口径骨干专业，融合电子技术、信号处理与人工智能。培养掌握现代电子电路设计、信息获取与处理、嵌入式系统开发等核心技术的应用型人才。主干课程：电子技术、高频电子线路、信号与系统、数字信号处理、EDA技术、嵌入式软件设计等。</div>
+                    <span class="major-btn" @click.stop="openMajorDetail('ee')">📖 查看详情</span>
+                </div>
+            </div>
+            <div class="major-item" @click="openMajorDetail('ai')">
+                <div class="major-title">
+                    <span class="major-icon">🤖</span>
+                    人工智能
+                </div>
+                <div class="major-desc">
+                    <div class="major-desc-text">四年制本科，工学学士。培养文理融通、专业扎实、能力过硬的高素质AI人才。掌握C语言、算法数据结构、机器学习、深度学习等核心课程，构建从基础编程到AI核心技术的完整知识链。就业领域：大模型研发、AIGC开发、计算机视觉、自然语言处理、智能制造、智慧医疗等。</div>
+                    <span class="major-btn" @click.stop="openMajorDetail('ai')">📖 查看详情</span>
+                </div>
+            </div>
+            <div class="major-item" @click="openMajorDetail('ds')">
+                <div class="major-title">
+                    <span class="major-icon">📊</span>
+                    数据科学与大数据技术
+                </div>
+                <div class="major-desc">
+                    <div class="major-desc-text">四年制本科，工学学士。培养具有数据采集、处理、可视化、平台搭建与运维能力的高素质应用型人才。以数据科学、计算机、统计学、AI为支撑，构建完整知识体系。主干课程：C语言、数据结构、Python、数据库、数据挖掘、Hadoop、人工智能等。就业岗位：大数据架构工程师、挖掘工程师、计算工程师、数据分析师等。</div>
+                    <span class="major-btn" @click.stop="openMajorDetail('ds')">📖 查看详情</span>
+                </div>
+            </div>
+            <div class="major-item dept-card">
+                <div class="major-title">
+                    <span class="major-icon">📐</span>
+                    公共课部
+                </div>
+                <div class="dept-list">
+                    <ul style="list-style:none; padding:0; margin:10px 0 0 0;">
+                        <li>信息教研室</li>
+                        <li>数学教研室</li>
+                        <li>物理教研室</li>
+                        <li>产教融合教研室</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <img src="whwl.jpg" class="corner-logo" alt="校徽">
+    </div>
+
+    <!-- 培养特色 -->
+    <div class="slide" :class="{ active: currentSlide === 3 }">
+        <img src="school.png" class="corner-logo-right" alt="学院">
+        <h2>✨ 培养特色</h2>
+        <ul style="max-width:850px;">
+            <li><strong>🔗 产教深度融合：</strong>与华为、腾讯云、百度、科大讯飞等头部企业共建实习基地，引入企业真实项目，校企双导师联合指导。
+                <button class="gallery-btn" @click="openGallery">📷 查看活动相册</button>
+            </li>
+            <li><strong>🚀 项目驱动教学：</strong>依托创新实验室和学科竞赛（电子设计大赛、智能汽车竞赛、"挑战杯"等），以赛促学，强化工程创新能力。
+                <button class="gallery-btn" @click="openGallery2">📷 查看活动相册</button>
+            </li>
+            <li><strong>🤝 学科交叉融合：</strong>以"AI+X"为牵引，计算机、电子、数据科学、人工智能多学科交叉，构建完整知识链。
+                <button class="gallery-btn" @click="openGallery3">📷 查看活动相册</button>
+            </li>
+            <li><strong>🌍 个性化发展路径：</strong>设立考研强化班、卓越工程师班，精准对接产业需求，为深造和高质量就业铺路。
+                <button class="gallery-btn" @click="openGallery4">📷 查看活动相册</button>
+            </li>
+            <li style="margin-top: 20px;">
+                <button class="gallery-btn" style="background: linear-gradient(135deg, #e74c3c, #c0392b);" @click="openGalleryNew">🆕 查看最新动态</button>
+            </li>
+        </ul>
+        <img src="whwl.jpg" class="corner-logo" alt="校徽">
+    </div>
+
+    <!-- 就业前景 -->
+    <div class="slide" :class="{ active: currentSlide === 4 }">
+        <img src="school.png" class="corner-logo-right" alt="学院">
+        <h2>📈 就业前景</h2>
+        <p>近三年毕业生平均就业率 <strong style="color:#1e6f9f;">96%</strong>，签约单位包括互联网大厂、世界500强、央企及政府事业单位。</p>
+        <ul>
+            <li><strong>头部企业：</strong>腾讯、阿里巴巴、百度、字节跳动、华为、中兴、小米、比亚迪等</li>
+            <li><strong>金融科技：</strong>各大银行、证券、保险金融科技部门</li>
+            <li><strong>新兴领域：</strong>大模型研发、AIGC、自动驾驶、智慧医疗、工业AI等前沿赛道</li>
+            <li><strong>深造院校：</strong>华中科技大学、武汉大学、电子科技大学等国内外知名高校读研深造</li>
+        </ul>
+        <p>毕业生起薪高、发展后劲足，深受用人单位好评。</p>
+        <img src="whwl.jpg" class="corner-logo" alt="校徽">
+    </div>
+
+    <!-- 报考指南 -->
+    <div class="slide" :class="{ active: currentSlide === 5 }">
+        <img src="school.png" class="corner-logo-right" alt="学院">
+        <h2>📝 报考指南</h2>
+        <ul>
+            <li><strong>招生计划：</strong>2026年本科计划招生520人（具体以省招办公布为准），专科40人。</li>
+            <li><strong>录取规则：</strong>按高考投档成绩从高到低择优录取，部分专业参考数学、英语成绩。</li>
+            <li><strong>奖助体系：</strong>国家奖学金、国家励志奖学金、校长奖学金、企业奖学金及勤工助学岗位，覆盖率达35%。</li>
+            <li><strong>学费标准：</strong>工学类专业 22800-26800 元/年（以物价部门审批为准）。</li>
+        </ul>
+        <img src="whwl.jpg" class="corner-logo" alt="校徽">
+    </div>
+
+    <!-- 联系方式 -->
+    <div class="slide" :class="{ active: currentSlide === 6 }">
+        <img src="school.png" class="corner-logo-right" alt="学院">
+        <h2>📞 联系我们</h2>
+        <p>📍 地址：湖北省武汉市黄陂区武湖街道胜海大道1号 武汉文理学院信息与计算机学院</p>
+        <p>📞 咨询电话：027-61818588 / 027-61818566</p>
+        <p>🌐 学院官网：<a href="#" style="color:#1e6f9f;">http://www.whwl.edu.cn/xxjs</a> (招生专栏)</p>
+        <p>📧 招生邮箱：zsb@whwl.edu.cn</p>
+        <p style="margin-top: 30px; font-weight: bold;">🎯 选择信息与计算机学院，与AI同行，创享未来！</p>
+        <img src="whwl.jpg" class="corner-logo" alt="校徽">
+    </div>
+
+    <!-- 专业详情 -->
+    <div v-if="showMajorDetail" class="major-detail-slide">
+        <h2 style="color:#ffdd99; border-left: 5px solid #ffb347; padding-left: 20px; text-align: left; width: 90%; max-width: 900px;">
+            {{ currentMajorDetail.title }}
+        </h2>
+        <div class="detail-content" v-html="currentMajorDetail.content"></div>
+        <button class="back-btn" @click="closeMajorDetail">← 返回专业列表</button>
+    </div>
+
+    <!-- 图片相册1 -->
+    <div v-if="showGallery" class="gallery-overlay">
+        <button class="gallery-back-btn" @click="closeGallery">← 返回培养特色</button>
+        <h3 class="gallery-title">📸 活动相册 ({{ gallery1Index + 1 }}/{{ gallery1Images.length }})</h3>
+        <div class="gallery-images" style="flex-direction: column;">
+            <div class="gallery-image-container" @click="gallery1Next">
+                <img :src="gallery1Images[gallery1Index]" :alt="'活动照片' + (gallery1Index + 1)">
+            </div>
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="gallery-btn" style="background: linear-gradient(135deg, #2c7cb6, #3498db);" @click="gallery1Prev" v-if="gallery1Index > 0">◀ 上一张</button>
+            <button class="gallery-btn" @click="gallery1Next">{{ gallery1Index < gallery1Images.length - 1 ? '下一张 ▶' : '关闭相册' }}</button>
+        </div>
+        <p class="gallery-hint">点击图片查看下一张 · 查看完毕后点击"关闭相册"跳转下一页</p>
+        <button class="gallery-next-hint" @click="galleryToNextSlide">跳转到下一页 ▶</button>
+    </div>
+
+    <!-- 图片相册2 -->
+    <div v-if="showGallery2" class="gallery-overlay">
+        <button class="gallery-back-btn" @click="closeGallery2">← 返回培养特色</button>
+        <h3 class="gallery-title">📸 活动相册 ({{ gallery2Index + 1 }}/{{ gallery2Images.length }})</h3>
+        <div class="gallery-images" style="flex-direction: column;">
+            <div class="gallery-image-container" @click="gallery2Next">
+                <img :src="gallery2Images[gallery2Index]" :alt="'活动照片' + (gallery2Index + 1)">
+            </div>
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="gallery-btn" style="background: linear-gradient(135deg, #2c7cb6, #3498db);" @click="gallery2Prev" v-if="gallery2Index > 0">◀ 上一张</button>
+            <button class="gallery-btn" @click="gallery2Next">{{ gallery2Index < gallery2Images.length - 1 ? '下一张 ▶' : '关闭相册' }}</button>
+        </div>
+        <p class="gallery-hint">点击图片查看下一张 · 查看完毕后点击"关闭相册"跳转下一页</p>
+        <button class="gallery-next-hint" @click="gallery2ToNextSlide">跳转到下一页 ▶</button>
+    </div>
+
+    <!-- 图片相册3 -->
+    <div v-if="showGallery3" class="gallery-overlay">
+        <button class="gallery-back-btn" @click="closeGallery3">← 返回培养特色</button>
+        <h3 class="gallery-title">📸 活动相册 ({{ gallery3Index + 1 }}/{{ gallery3Images.length }})</h3>
+        <div class="gallery-images" style="flex-direction: column;">
+            <div class="gallery-image-container" @click="gallery3Next">
+                <img :src="gallery3Images[gallery3Index]" :alt="'活动照片' + (gallery3Index + 1)">
+            </div>
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="gallery-btn" style="background: linear-gradient(135deg, #2c7cb6, #3498db);" @click="gallery3Prev" v-if="gallery3Index > 0">◀ 上一张</button>
+            <button class="gallery-btn" @click="gallery3Next">{{ gallery3Index < gallery3Images.length - 1 ? '下一张 ▶' : '关闭相册' }}</button>
+        </div>
+        <p class="gallery-hint">点击图片查看下一张 · 查看完毕后点击"关闭相册"跳转下一页</p>
+        <button class="gallery-next-hint" @click="gallery3ToNextSlide">跳转到下一页 ▶</button>
+    </div>
+
+    <!-- 图片相册4 -->
+    <div v-if="showGallery4" class="gallery-overlay">
+        <button class="gallery-back-btn" @click="closeGallery4">← 返回培养特色</button>
+        <h3 class="gallery-title">📸 活动相册 ({{ gallery4Index + 1 }}/{{ gallery4Images.length }})</h3>
+        <div class="gallery-images" style="flex-direction: column;">
+            <div class="gallery-image-container" @click="gallery4Next">
+                <img :src="gallery4Images[gallery4Index]" :alt="'活动照片' + (gallery4Index + 1)">
+            </div>
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="gallery-btn" style="background: linear-gradient(135deg, #2c7cb6, #3498db);" @click="gallery4Prev" v-if="gallery4Index > 0">◀ 上一张</button>
+            <button class="gallery-btn" @click="gallery4Next">{{ gallery4Index < gallery4Images.length - 1 ? '下一张 ▶' : '关闭相册' }}</button>
+        </div>
+        <p class="gallery-hint">点击图片查看下一张 · 查看完毕后点击"关闭相册"跳转下一页</p>
+        <button class="gallery-next-hint" @click="gallery4ToNextSlide">跳转到下一页 ▶</button>
+    </div>
+
+    <!-- 最新动态相册 -->
+    <div v-if="showGalleryNew" class="gallery-overlay">
+        <button class="gallery-back-btn" @click="closeGalleryNew">← 返回培养特色</button>
+        <h3 class="gallery-title">🆕 最新动态 ({{ galleryNewIndex + 1 }}/{{ galleryNewImages.length }})</h3>
+        <div class="gallery-images" style="flex-direction: column;">
+            <div class="gallery-image-container" @click="galleryNewNext">
+                <img :src="galleryNewImages[galleryNewIndex]" :alt="'最新动态' + (galleryNewIndex + 1)">
+            </div>
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="gallery-btn" style="background: linear-gradient(135deg, #2c7cb6, #3498db);" @click="galleryNewPrev" v-if="galleryNewIndex > 0">◀ 上一张</button>
+            <button class="gallery-btn" @click="galleryNewNext">{{ galleryNewIndex < galleryNewImages.length - 1 ? '下一张 ▶' : '关闭相册' }}</button>
+        </div>
+        <p class="gallery-hint">点击图片查看下一张 · 查看完毕后点击"关闭相册"跳转下一页</p>
+        <button class="gallery-next-hint" @click="galleryNewToNextSlide">跳转到下一页 ▶</button>
+    </div>
+
+    <!-- 导航按钮 -->
+    <div class="nav-buttons" v-if="!showMajorDetail && !showGallery && !showGallery2 && !showGallery3 && !showGallery4 && !showGalleryNew">
+        <button class="nav-btn" @click="goPrev" :disabled="currentSlide === 0">◀ 上一页</button>
+        <button class="nav-btn" @click="goNext" :disabled="currentSlide === totalSlides - 1">下一页 ▶</button>
+        <button class="nav-btn" @click="toggleFullscreen">⛶ {{ isFullscreen ? '窗口' : '全屏' }}</button>
+    </div>
+
+    <div class="touch-hint" v-if="showTouchHint && !showGallery && !showGallery2 && !showGallery3 && !showGallery4 && !showGalleryNew">支持左右滑动或使用方向键切换</div>
+</div>
+
+<script>
+    const { createApp, ref, computed, onMounted, onUnmounted } = Vue;
+    
+    createApp({
+        setup() {
+            const currentSlide = ref(0);
+            const totalSlides = 7;
+            const showMajorDetail = ref(false);
+            const showGallery = ref(false);
+            const showGallery2 = ref(false);
+            const showGallery3 = ref(false);
+            const showGallery4 = ref(false);
+            const showGalleryNew = ref(false);
+            const gallery1Index = ref(0);
+            const gallery2Index = ref(0);
+            const gallery3Index = ref(0);
+            const gallery4Index = ref(0);
+            const galleryNewIndex = ref(0);
+            const gallery1Images = ['4_1.jpg', '4_2.jpg'];
+            const gallery2Images = ['4_2_1.jpg', '4_2_2.jpg'];
+            const gallery3Images = ['4_3.jpg'];
+            const gallery4Images = ['4_4.jpg', '4_4_1.png'];
+            const galleryNewImages = ['new.jpg', 'new2.jpg'];
+            const currentMajorId = ref('');
+            const isFullscreen = ref(false);
+            const showTouchHint = ref(true);
+            const touchStartX = ref(0);
+            const touchEndX = ref(0);
+
+            const progressWidth = computed(() => {
+                return ((currentSlide.value + 1) / totalSlides) * 100;
+            });
+
+            const majorDetails = {
+                'cs': {
+                    title: '计算机科学与技术 (工学学士，四年制)',
+                    content: `
+                        <h3>🎯 培养目标</h3>
+                        <p>培养具备扎实的计算机科学理论基础与系统的人工智能专业知识，具有较强的工程实践能力与创新思维，紧跟前沿技术发展的复合型应用人才。</p>
+                        <h3>📘 主干课程</h3>
+                        <ul><li>计算机组成原理、计算机网络、人工智能、高级语言程序设计、数据结构、操作系统、大数据处理及应用等。</li></ul>
+                        <h3>💼 就业方向</h3>
+                        <p>各行业计算机软硬件系统研究、设计、开发、运维与管理；人工智能算法设计与应用开发；企事业单位信息化、数字化、智能化建设等岗位。</p>
+                        <h3>🌟 专业特色</h3>
+                        <ul><li><strong>双轨并重，能力导向：</strong>理论教学与实践教学并重，知识传授与能力培养并重，构建创新与实践平台。</li>
+                        <li><strong>产教融合，协同育人：</strong>引入企业真实项目，实现"做中学、学中创"，提升职业竞争力。</li>
+                        <li><strong>紧跟前沿，创新引领：</strong>融入AI、大数据、云计算等新一代技术，强化技术创新能力。</li>
+                        <li><strong>质量卓越，就业领先：</strong>毕业生在软件开发、系统架构领域表现突出，就业率持续高位。</li></ul>
+                    `
+                },
+                'se': {
+                    title: '软件工程 (工学学士，四年制)',
+                    content: `
+                        <h3>🤖 AI赋能，紧跟时代前沿</h3>
+                        <p>深度融合"AI+软件工程"，涵盖数据结构、面向对象程序设计等核心基石，引入人工智能应用、AI数字媒体技术等前沿课程。利用AI工具提升软件与游戏设计水准与效率，培养掌握前沿技术的软件精英。</p>
+                        <h3>⚙️ 硬核实践，复合型精英</h3>
+                        <p>聚焦基于工程化方法的软件开发与项目管理，通过校企联合培养与企业导师真实项目实训，结合游戏制作、Web与移动开发等实践课程，让技术落地生根。</p>
+                        <h3>📌 主干课程</h3>
+                        <ul><li>数据结构与算法、面向对象程序设计、数据库原理、软件工程、软件测试、Web前端开发、移动应用开发、AI应用开发、AI数字媒体技术、软件项目管理等。</li></ul>
+                        <h3>🚀 就业蓝海</h3>
+                        <p>凭借扎实工程实践能力，毕业生深受互联网大厂、金融科技、移动应用、大型企业及政府机构青睐。职位覆盖全栈开发工程师、测试开发、技术经理、AI软件工程师等。</p>
+                        <h3>✨ 专业特色</h3>
+                        <p>工程化培养+前沿AI技术，依托校企合作基地与真实项目研发，学生毕业即具备2年项目经验，薪酬优势明显。</p>
+                    `
+                },
+                'ee': {
+                    title: '电子信息工程 (工学学士，四年制)',
+                    content: `
+                        <h3>📡 培养目标</h3>
+                        <p>本专业是电子与信息领域的宽口径骨干专业，融合电子技术、信号处理与人工智能。培养掌握现代电子电路设计、信息获取与处理、嵌入式系统开发等核心技术的应用型人才。</p>
+                        <h3>📖 主干课程</h3>
+                        <ul><li>电子技术、高频电子线路、信号与系统、数字信号处理、单片机原理及应用、微控制器系统应用开发、通信原理、EDA技术与应用、嵌入式软件设计。</li></ul>
+                        <h3>💡 就业方向</h3>
+                        <p>从事嵌入式系统、人工智能、计算机通信、自动化控制、仪器仪表等行业产品的设计、开发、应用、维护等工作。</p>
+                        <h3>⚡ 特色简介</h3>
+                        <ul><li><strong>软硬结合：</strong>理论与实践深度融合，立体化课程体系：基础理论+微控制器实践+嵌入式开发导向课程。</li>
+                        <li><strong>全方位实践平台：</strong>依托创新实验室，参加全国大学生电子设计竞赛、智能汽车竞赛、"挑战杯"等，提升动手能力。</li>
+                        <li>毕业生可从事嵌入式开发、考研深造，并轻松向人工智能方向拓展，就业质量高。</li></ul>
+                    `
+                },
+                'ai': {
+                    title: '人工智能 (工学学士，四年制)',
+                    content: `
+                        <h3>🎓 培养目标</h3>
+                        <p>旨在培养文理融通、专业扎实、能力过硬的高素质应用型人工智能人才。掌握系统的人工智能专业知识，具备分析和解决复杂工程问题的能力，拥有良好工程素养、创新思维与团队协作能力，可在AI领域从事研究、开发、应用、集成与技术管理等工作。</p>
+                        <h3>📚 主要课程</h3>
+                        <ul><li>C语言程序设计、算法与数据结构、最优化方法、电子技术、面向对象程序设计、数据库原理及应用、数字逻辑、操作系统、计算机组成原理、数字信号处理、数字图像技术、机器学习、深度学习与应用等，构建完整AI知识链。</li></ul>
+                        <h3>🌐 就业领域</h3>
+                        <p>大模型研发与应用、生成式AI（AIGC）开发、科学智能（AI for Science）研究、嵌入式智能系统开发、计算机视觉与自然语言处理、工业AI与智能制造、智慧医疗与智能金融、自动驾驶与智能出行、AI产品设计与技术服务等前沿方向。</p>
+                        <h3>⭐ 专业特色</h3>
+                        <ul><li>依托控制科学与工程、计算机科学与技术等多学科交叉融合，课程紧贴产业需求；</li>
+                        <li>注重实践教学，强化工程应用能力；立足区域产业，精准对接人才需求；毕业要求与课程深度衔接，全方位提升职业竞争力。</li></ul>
+                    `
+                },
+                'ds': {
+                    title: '数据科学与大数据技术 (工学学士，四年制)',
+                    content: `
+                        <h3>📊 培养目标</h3>
+                        <p>培养文理融通、能力过硬、创新笃实，具备数据采集、处理、可视化、平台搭建与运维能力，解决大数据科学与工程问题的应用型专门人才，具有AI素养，能在企事业单位从事信息管理、数据分析、数据平台维护等工作。</p>
+                        <h3>📌 主干课程</h3>
+                        <ul><li>数据结构与算法（C语言）、程序设计基础、Python语言基础、数学实验与数学模型、数据挖掘与数据分析（Python）、Hadoop技术原理与应用、人工智能等。</li></ul>
+                        <h3>💼 就业岗位</h3>
+                        <p>大数据架构工程师、大数据挖掘工程师、大数据计算工程师、大数据分析工程师，以及数据分析师、数据产品经理等，覆盖互联网、金融、政务、医疗、智能制造等领域。</p>
+                        <h3>🔍 专业特色</h3>
+                        <ul><li><strong>学科交叉融合：</strong>以数据科学、计算机、统计学、人工智能为支撑，构建完整知识体系，培养扎实数据思维。</li>
+                        <li><strong>产教深度融合：</strong>引入企业真实项目，重点训练大数据系统开发、数据分析建模、机器学习应用、数据治理等实操技能。</li>
+                        <li><strong>对接产业需求：</strong>紧扣国家数字化转型战略，职业发展空间广阔，毕业生起薪高、晋升快。</li></ul>
+                    `
+                }
+            };
+
+            const currentMajorDetail = computed(() => {
+                return majorDetails[currentMajorId.value] || { title: '', content: '' };
+            });
+
+            const goPrev = () => {
+                if (currentSlide.value > 0) currentSlide.value--;
+            };
+
+            const goNext = () => {
+                if (currentSlide.value < totalSlides - 1) currentSlide.value++;
+            };
+
+            const goToSlide = (index) => {
+                currentSlide.value = index;
+            };
+
+            const openMajorDetail = (majorId) => {
+                currentMajorId.value = majorId;
+                showMajorDetail.value = true;
+            };
+
+            const closeMajorDetail = () => {
+                showMajorDetail.value = false;
+            };
+
+            const openGallery = () => {
+                gallery1Index.value = 0;
+                showGallery.value = true;
+            };
+
+            const closeGallery = () => {
+                showGallery.value = false;
+            };
+
+            const gallery1Next = () => {
+                if (gallery1Index.value < gallery1Images.length - 1) {
+                    gallery1Index.value++;
+                } else {
+                    closeGallery();
+                }
+            };
+
+            const gallery1Prev = () => {
+                if (gallery1Index.value > 0) {
+                    gallery1Index.value--;
+                }
+            };
+
+            const galleryToNextSlide = () => {
+                showGallery.value = false;
+                goNext();
+            };
+
+            const openGallery2 = () => {
+                gallery2Index.value = 0;
+                showGallery2.value = true;
+            };
+
+            const closeGallery2 = () => {
+                showGallery2.value = false;
+            };
+
+            const gallery2Next = () => {
+                if (gallery2Index.value < gallery2Images.length - 1) {
+                    gallery2Index.value++;
+                } else {
+                    closeGallery2();
+                }
+            };
+
+            const gallery2Prev = () => {
+                if (gallery2Index.value > 0) {
+                    gallery2Index.value--;
+                }
+            };
+
+            const gallery2ToNextSlide = () => {
+                showGallery2.value = false;
+                goNext();
+            };
+
+            const openGallery3 = () => {
+                gallery3Index.value = 0;
+                showGallery3.value = true;
+            };
+
+            const closeGallery3 = () => {
+                showGallery3.value = false;
+            };
+
+            const gallery3Next = () => {
+                if (gallery3Index.value < gallery3Images.length - 1) {
+                    gallery3Index.value++;
+                } else {
+                    closeGallery3();
+                }
+            };
+
+            const gallery3Prev = () => {
+                if (gallery3Index.value > 0) {
+                    gallery3Index.value--;
+                }
+            };
+
+            const gallery3ToNextSlide = () => {
+                showGallery3.value = false;
+                goNext();
+            };
+
+            const openGallery4 = () => {
+                gallery4Index.value = 0;
+                showGallery4.value = true;
+            };
+
+            const closeGallery4 = () => {
+                showGallery4.value = false;
+            };
+
+            const gallery4Next = () => {
+                if (gallery4Index.value < gallery4Images.length - 1) {
+                    gallery4Index.value++;
+                } else {
+                    closeGallery4();
+                }
+            };
+
+            const gallery4Prev = () => {
+                if (gallery4Index.value > 0) {
+                    gallery4Index.value--;
+                }
+            };
+
+            const gallery4ToNextSlide = () => {
+                showGallery4.value = false;
+                goNext();
+            };
+
+            const openGalleryNew = () => {
+                galleryNewIndex.value = 0;
+                showGalleryNew.value = true;
+            };
+
+            const closeGalleryNew = () => {
+                showGalleryNew.value = false;
+            };
+
+            const galleryNewNext = () => {
+                if (galleryNewIndex.value < galleryNewImages.length - 1) {
+                    galleryNewIndex.value++;
+                } else {
+                    closeGalleryNew();
+                }
+            };
+
+            const galleryNewPrev = () => {
+                if (galleryNewIndex.value > 0) {
+                    galleryNewIndex.value--;
+                }
+            };
+
+            const galleryNewToNextSlide = () => {
+                showGalleryNew.value = false;
+                goNext();
+            };
+
+            const toggleFullscreen = () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                } else {
+                    document.exitFullscreen().catch(() => {});
+                }
+            };
+
+            const handleKeydown = (e) => {
+                if (showMajorDetail.value) {
+                    if (e.key === 'Escape') closeMajorDetail();
+                } else if (showGallery.value) {
+                    if (e.key === 'Escape') closeGallery();
+                    else if (e.key === 'ArrowRight') gallery1Next();
+                    else if (e.key === 'ArrowLeft') gallery1Prev();
+                } else if (showGallery2.value) {
+                    if (e.key === 'Escape') closeGallery2();
+                    else if (e.key === 'ArrowRight') gallery2Next();
+                    else if (e.key === 'ArrowLeft') gallery2Prev();
+                } else if (showGallery3.value) {
+                    if (e.key === 'Escape') closeGallery3();
+                    else if (e.key === 'ArrowRight') gallery3Next();
+                    else if (e.key === 'ArrowLeft') gallery3Prev();
+                } else if (showGallery4.value) {
+                    if (e.key === 'Escape') closeGallery4();
+                    else if (e.key === 'ArrowRight') gallery4Next();
+                    else if (e.key === 'ArrowLeft') gallery4Prev();
+                } else if (showGalleryNew.value) {
+                    if (e.key === 'Escape') closeGalleryNew();
+                    else if (e.key === 'ArrowRight') galleryNewNext();
+                    else if (e.key === 'ArrowLeft') galleryNewPrev();
+                } else {
+                    if (e.key === 'ArrowLeft') goPrev();
+                    else if (e.key === 'ArrowRight') goNext();
+                }
+            };
+
+            const handleTouchStart = (e) => {
+                touchStartX.value = e.touches[0].clientX;
+            };
+
+            const handleTouchEnd = (e) => {
+                if (showMajorDetail.value) {
+                    closeMajorDetail();
+                    return;
+                }
+                if (showGallery.value) {
+                    closeGallery();
+                    return;
+                }
+                if (showGallery2.value) {
+                    closeGallery2();
+                    return;
+                }
+                if (showGallery3.value) {
+                    closeGallery3();
+                    return;
+                }
+                if (showGallery4.value) {
+                    closeGallery4();
+                    return;
+                }
+                if (showGalleryNew.value) {
+                    closeGalleryNew();
+                    return;
+                }
+                touchEndX.value = e.changedTouches[0].clientX;
+                const diff = touchStartX.value - touchEndX.value;
+                if (Math.abs(diff) > 50) {
+                    diff > 0 ? goNext() : goPrev();
+                }
+            };
+
+            onMounted(() => {
+                document.addEventListener('keydown', handleKeydown);
+                document.addEventListener('touchstart', handleTouchStart);
+                document.addEventListener('touchend', handleTouchEnd);
+                setTimeout(() => { showTouchHint.value = false; }, 3000);
+            });
+
+            onUnmounted(() => {
+                document.removeEventListener('keydown', handleKeydown);
+                document.removeEventListener('touchstart', handleTouchStart);
+                document.removeEventListener('touchend', handleTouchEnd);
+            });
+
+            return {
+                currentSlide, totalSlides, showMajorDetail, showGallery, showGallery2, showGallery3, showGallery4, showGalleryNew,
+                currentMajorDetail, isFullscreen, showTouchHint, progressWidth,
+                goPrev, goNext, goToSlide, openMajorDetail, closeMajorDetail, toggleFullscreen,
+                openGallery, closeGallery, gallery1Next, gallery1Prev, gallery1Images, gallery1Index,
+                openGallery2, closeGallery2, gallery2Next, gallery2Prev, gallery2Images, gallery2Index,
+                galleryToNextSlide, gallery2ToNextSlide,
+                openGallery3, closeGallery3, gallery3Next, gallery3Prev, gallery3Images, gallery3Index, gallery3ToNextSlide,
+                openGallery4, closeGallery4, gallery4Next, gallery4Prev, gallery4Images, gallery4Index, gallery4ToNextSlide,
+                openGalleryNew, closeGalleryNew, galleryNewNext, galleryNewPrev, galleryNewImages, galleryNewIndex, galleryNewToNextSlide
+            };
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
